@@ -1,0 +1,8 @@
+pour DOCKER :
+docker build -t *nom-image*
+docker images // voir toutes les images
+docker rmi *nom-image*
+docker run -dit -p 80:80 --name=*nom-conteneur* *nom-image*
+docker stop *nom-conteneur*
+docker rm $(docker ps -a -q)
+docker exec -it *nom-conteneur* bash
