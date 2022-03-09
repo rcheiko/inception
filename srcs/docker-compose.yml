@@ -1,0 +1,34 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    docker-compose.yml                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rcheiko <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/07 17:23:09 by rcheiko           #+#    #+#              #
+#    Updated: 2022/03/09 15:13:04 by rcheiko          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+version: "3"
+services:
+    nginx:
+        container_name: nginx
+        build: nginx/
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - "php-wordpress"
+        volumes:
+            - phpvolume:/var/www/html
+    php-wordpress:
+        container_name: wordpress
+        build: wordpress/
+        ports:
+            - "9000:9000"
+        volumes: 
+            - phpvolume:/var/www/html
+volumes:
+    phpvolume:
+
