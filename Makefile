@@ -6,11 +6,11 @@
 #    By: rcheiko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 12:53:49 by rcheiko           #+#    #+#              #
-#    Updated: 2022/03/09 11:30:55 by rcheiko          ###   ########.fr        #
+#    Updated: 2022/03/16 13:59:05 by rcheiko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= inception
 
 docker:
-				cd ./srcs/ && docker compose up
+				cd ./srcs/ && docker compose up --build

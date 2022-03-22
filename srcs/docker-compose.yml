@@ -6,7 +6,7 @@
 #    By: rcheiko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 17:23:09 by rcheiko           #+#    #+#              #
-#    Updated: 2022/03/09 15:13:04 by rcheiko          ###   ########.fr        #
+#    Updated: 2022/03/17 17:33:55 by rcheiko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,44 @@ version: "3"
 services:
     nginx:
         container_name: nginx
-        build: nginx/
+        build: requirements/nginx/
         ports:
-            - "80:80"
             - "443:443"
         depends_on:
             - "php-wordpress"
         volumes:
             - phpvolume:/var/www/html
+        networks:
+           - host
+        restart: always
     php-wordpress:
         container_name: wordpress
-        build: wordpress/
+        build: requirements/wordpress/
         ports:
             - "9000:9000"
+        depends_on:
+            - "mariadb"
         volumes: 
             - phpvolume:/var/www/html
+        networks:
+            - host
+        restart: always
+    mariadb:
+        container_name: mariadb
+        build: requirements/mariadb/
+        ports:
+            - "3306:3306"
+        volumes:
+            - mariadbvolume:/var/lib/mysql
+        networks:
+            - host
+        environment:
+            MYSQL_DATABASE: 'wordpress'
+            MYSQL_USER: 'wpuser'
+            MYSQL_PASSWORD: 'password'
+        restart: always
 volumes:
     phpvolume:
-
+    mariadbvolume:
+networks:
+    host:
