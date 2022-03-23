@@ -6,7 +6,7 @@
 #    By: rcheiko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 17:23:09 by rcheiko           #+#    #+#              #
-#    Updated: 2022/03/17 17:33:55 by rcheiko          ###   ########.fr        #
+#    Updated: 2022/03/23 11:27:03 by rcheiko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,16 @@ services:
         restart: always
 volumes:
     phpvolume:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: 'home/rcheiko/data/wordpress/'
     mariadbvolume:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: 'home/rcheiko/data/mariadb/'
 networks:
     host:
